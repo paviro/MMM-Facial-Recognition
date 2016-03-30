@@ -1,0 +1,25 @@
+{
+  "name": "Magic-Mirror-Module-Callmonitor",
+  "version": "2.0.0",
+  "description": "A callmonitor module for the Magic Mirror.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paviro/MMM-FRITZ-Box-Callmonitor"
+  },
+  "keywords": [
+    "magic mirror",
+    "smart mirror",
+    "callmonitor",
+    "module"
+  ],
+  "author": "Paul-Vincent Roll",
+  "contributors": "https://github.com/MichMich/MagicMirror/graphs/contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paviro/MMM-FRITZ-Box-Callmonitor/issues"
+  },
+  "homepage": "https://github.com/paviro/MMM-FRITZ-Box-Callmonitor#readme",
+  "dependencies": {
+    "python-shell": "latest"
+    }
+}
