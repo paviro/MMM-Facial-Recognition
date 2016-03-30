@@ -9,17 +9,27 @@
 
 Module.create({
 	
-	// Default module config.
 	defaults: {
+		// 1=LBPH | 2=Fisher | 3=Eigen
 		RECOGNITION_ALGORITHM: 1,
-		TRAINING_FILE: 'modules/' + this.name + "/training.xml",
+		// Path to your training xml
+		TRAINING_FILE: 'modules/MMM-Facial-Recognition/training.xml',
+		// recognition intervall in seconds (smaller number = faster but CPU intens!)
 		INTERVAL: 2,
-		people: ['s', 'sd']
+		// Logout delay after last recognition so that a user does not get instantly logged out if he turns away from the mirror for a few seconds
+		LOGOUT_DELAY: 15,
+		// Array with usernames (copy and paste from training script)
+		USER: []
 	},
 	
 	// Override socket notification handler.
 	socketNotificationReceived: function(notification, payload) {
-		console.log(notification);
+		if (payload.action == "login"){
+			console.log("Benutzer " + payload.user + " angemeldet.");
+		}
+		else if (payload.action == "logout"){
+			console.log("Benutzer " + payload.user + " abgemeldet.");
+		}
 	},
 	
 	start: function() {
