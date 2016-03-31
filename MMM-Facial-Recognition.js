@@ -25,16 +25,33 @@ Module.register('MMM-Facial-Recognition',{
 	// Override socket notification handler.
 	socketNotificationReceived: function(notification, payload) {
 		if (payload.action == "login"){
-			console.log("Logged in user " + payload.user + " with confidence " + payload.confidence.toString() + ".");
+			this.current_user = payload.user;
+			this.updateDom(3000);
 		}
 		else if (payload.action == "logout"){
-			console.log("Logged out user " + payload.user + ".");
+			this.current_user = null;
+			this.updateDom(3000);
 		}
 	},
 	
 	start: function() {
+		this.current_user = null;
 		this.sendSocketNotification('CONFIG', this.config);
 		Log.info('Starting module: ' + this.name);
+	},
+	
+	getDom: function() {
+		if (this.current_user != null){
+		var wrapper = document.createElement("div");
+		
+		wrapper.className = "normal medium"
+		wrapper.innerHTML = "Hello " + this.current_user +  "!"
+
+		return wrapper;
+		}
+		else {
+			return document.createElement("div");
+		}
 	}
 
 });
