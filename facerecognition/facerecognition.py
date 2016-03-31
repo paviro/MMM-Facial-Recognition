@@ -61,7 +61,7 @@ while True:
         # No face found, logout user?
         if result is None:
             # if last detection exceeds timeout and there is someone logged in -> logout!
-            if (time.time() - login_timestamp > json.loads(sys.argv[1])["LOGOUT_DELAY"] and current_user is not None):
+            if (current_user is not None and time.time() - login_timestamp > json.loads(sys.argv[1])["LOGOUT_DELAY"]):
                 # callback logout to node helper
                 to_node("logout", {"user": current_user})
                 same_user_detected_in_row = 0
