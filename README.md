@@ -9,6 +9,7 @@ The entry in config.js can look like the following. (NOTE: You only have to add 
 ```
 {
 	module: 'MMM-Facial-Recognition',
+	position: 'top_left',
 	config: {
 		// 1=LBPH | 2=Fisher | 3=Eigen
 		RECOGNITION_ALGORITHM: 1,
@@ -25,7 +26,7 @@ The entry in config.js can look like the following. (NOTE: You only have to add 
 ```
 
 ## Important Notes
-- Currently this only logs who is recognised, as soon as module swaping is supported by the mirror system it will be added.
+- Currently this only displays who is recognised, as soon as module swaping is supported by the mirror system it will be added.
 
 ## Dependencies
 - [OpenCV](http://opencv.org) (sudo apt-get install libopencv-dev python-opencv)
