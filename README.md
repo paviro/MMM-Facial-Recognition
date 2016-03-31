@@ -1,11 +1,11 @@
 # MMM-Facial-Recognition
-This an extension for the [MagicMirror](https://github.com/MichMich/MagicMirror). It provides facial recognition and module swaping based on the current user.
+This an extension for the [MagicMirror](https://github.com/MichMich/MagicMirror). It provides facial recognition and module swapping based on the current user.
 
 ## Usage
 To train the needed model use the [MMM-Facial-Recognition-Tools](https://github.com/paviro/MMM-Facial-Recognition-Tools).
 
 ## Important Notes
-- Currently this only logs who is recognised, as soon as module swaping is supported by the mirror system it will be added.
+- Currently this only logs who is recognised, as soon as module swapping is supported by the mirror system it will be added.
 
 ## Dependencies
 - [OpenCV](http://opencv.org) (sudo apt-get install libopencv-dev python-opencv)

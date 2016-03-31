@@ -6,10 +6,10 @@ var pythonStarted = false
 
 module.exports = NodeHelper.create({
   
-  python_start: function (config) {
+  python_start: function () {
     const starter = {RECOGNITION_ALGORITHM: "1", TRAINING_FILE: 'modules/' + this.name + "/training.xml",  INTERVAL: 2}
     const self = this;
-    const pyshell = new PythonShell('modules/' + this.name + '/facerecognition/facerecognition.py', { mode: 'json', args: [JSON.stringify(config)]});
+    const pyshell = new PythonShell('modules/' + this.name + '/facerecognition/facerecognition.py', { mode: 'json', args: [JSON.stringify(this.config)]});
 
     pyshell.on('message', function (message) {
       
@@ -38,7 +38,7 @@ module.exports = NodeHelper.create({
       this.config = payload
       if(!pythonStarted) {
         pythonStarted = true;
-        this.python_start(payload);
+        this.python_start();
         };
     };
   }

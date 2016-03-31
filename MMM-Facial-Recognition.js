@@ -1,7 +1,7 @@
 /* global Module */
 
 /* Magic Mirror
- * Module: MMM-FRITZ-Box-Callmonitor
+ * Module: MMM-Facial-Recognition
  *
  * By Paul-Vincent Roll http://paulvincentroll.com
  * MIT Licensed.
@@ -25,10 +25,10 @@ Module.create({
 	// Override socket notification handler.
 	socketNotificationReceived: function(notification, payload) {
 		if (payload.action == "login"){
-			console.log("Benutzer " + payload.user + " angemeldet.");
+			console.log("Logged in user " + payload.user + " with confidence " + payload.confidence.toString() + ".");
 		}
 		else if (payload.action == "logout"){
-			console.log("Benutzer " + payload.user + " abgemeldet.");
+			console.log("Logged out user " + payload.user + ".");
 		}
 	},
 	
