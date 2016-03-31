@@ -1,7 +1,12 @@
 #!/usr/bin/python
 # coding: utf8
-# Raspberry Pi Face Recognition Treasure Box Configuration
-# Copyright 2013 Tony DiCola
+"""MMM-Facial-Recognition - MagicMirror Module
+Face Recognition script config
+The MIT License (MIT)
+
+Copyright (c) 2016 Paul-Vincent Roll (MIT License)
+Based on work by Tony DiCola (Copyright 2013) (MIT License)
+"""
 import inspect
 import os
 import json
