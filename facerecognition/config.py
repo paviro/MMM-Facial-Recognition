@@ -14,7 +14,7 @@ def to_node(type, message):
     sys.stdout.flush()
 
 
-_platform = platform.system().lower()
+_platform = platform.uname()[4]
 path_to_file = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
 # Threshold for the confidence of a recognized face before it's considered a
@@ -48,12 +48,12 @@ HAAR_MIN_SIZE = (30, 30)
 def get_camera():
     to_node("status", "-" * 20)
     to_node("status", "Beutztes System: " + _platform)
-    if _platform == "darwin":
-        import webcam
-        to_node("status", "Webcam ausgewählt...")
-        return webcam.OpenCVCapture(device_id=0)
-    elif _platform == "linux" or _platform == "linux2":
+    if "arm" in _platform:
         import picam
         to_node("status", "PiCam ausgewählt...")
         return picam.OpenCVCapture()
+    else:
+        import webcam
+        to_node("status", "Webcam ausgewählt...")
+        return webcam.OpenCVCapture(device_id=0)
     to_node("status", "-" * 20)
