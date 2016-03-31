@@ -1,24 +1,24 @@
 {
-  "name": "Magic-Mirror-Module-Callmonitor",
+  "name": "Magic-Mirror-Module-Facial-Recognition",
   "version": "2.0.0",
-  "description": "A callmonitor module for the Magic Mirror.",
+  "description": "Facial recognition and module swaping for the Magic Mirror.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/paviro/MMM-FRITZ-Box-Callmonitor"
+    "url": "git+https://github.com/paviro/MMM-Facial-Recognition"
   },
   "keywords": [
     "magic mirror",
     "smart mirror",
-    "callmonitor",
+    "Facial recognition",
     "module"
   ],
   "author": "Paul-Vincent Roll",
-  "contributors": "https://github.com/MichMich/MagicMirror/graphs/contributors",
+  "contributors": "https://github.com/paviro/MMM-Facial-Recognition/graphs/contributors",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/paviro/MMM-FRITZ-Box-Callmonitor/issues"
+    "url": "https://github.com/paviro/MMM-Facial-Recognition/issues"
   },
-  "homepage": "https://github.com/paviro/MMM-FRITZ-Box-Callmonitor#readme",
+  "homepage": "https://github.com/paviro/MMM-Facial-Recognition#readme",
   "dependencies": {
     "python-shell": "latest"
     }
