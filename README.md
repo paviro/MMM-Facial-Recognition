@@ -13,6 +13,13 @@ The entry in config.js can look like the following. (NOTE: You only have to add 
 	config: {
 		// 1=LBPH | 2=Fisher | 3=Eigen
 		RECOGNITION_ALGORITHM: 1,
+		// Threshold for the confidence of a recognized face before it's considered a
+		// positive match.  Confidence values below this threshold will be considered
+		// a positive match because the lower the confidence value, or distance, the
+		// more confident the algorithm is that the face was correctly detected.
+		LBPH_THRESHOLD: 50,
+		FISHER_THRESHOLD: 250,
+		EIGEN_THRESHOLD: 3000,
 		// Path to your training xml
 		TRAINING_FILE: 'modules/MMM-Facial-Recognition/training.xml',
 		// recognition intervall in seconds (smaller number = faster but CPU intens!)

@@ -22,20 +22,6 @@ def to_node(type, message):
 _platform = platform.uname()[4]
 path_to_file = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
-# Threshold for the confidence of a recognized face before it's considered a
-# positive match.  Confidence values below this threshold will be considered
-# a positive match because the lower the confidence value, or distance, the
-# more confident the algorithm is that the face was correctly detected.
-# Start with a value of 3000, but you might need to tweak this value down if
-# you're getting too many false positives (incorrectly recognized faces), or up
-# if too many false negatives (undetected faces).
-if json.loads(sys.argv[1])["RECOGNITION_ALGORITHM"] == 1:
-    POSITIVE_THRESHOLD = 50
-elif json.loads(sys.argv[1])["RECOGNITION_ALGORITHM"] == 2:
-    POSITIVE_THRESHOLD = 250
-else:
-    POSITIVE_THRESHOLD = 3000
-
 # Size (in pixels) to resize images for training and prediction.
 # Don't change this unless you also change the size of the training images.
 FACE_WIDTH = 92
