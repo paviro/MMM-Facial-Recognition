@@ -7,7 +7,7 @@
  * MIT Licensed.
  */
 
-Module.create({
+Module.register('MMM-Facial-Recognition',{
 	
 	defaults: {
 		// 1=LBPH | 2=Fisher | 3=Eigen
@@ -34,7 +34,6 @@ Module.create({
 	
 	start: function() {
 		this.sendSocketNotification('CONFIG', this.config);
-		
 		Log.info('Starting module: ' + this.name);
 	}
 
