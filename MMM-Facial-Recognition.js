@@ -25,7 +25,13 @@ Module.register('MMM-Facial-Recognition',{
 	// Override socket notification handler.
 	socketNotificationReceived: function(notification, payload) {
 		if (payload.action == "login"){
-			this.current_user = payload.user;
+			console.log(payload.user);
+			if (payload.user == -1){
+				this.current_user = "stranger"
+			}
+			else{
+				this.current_user = this.config.USER[payload.user];
+			}
 			this.updateDom(3000);
 		}
 		else if (payload.action == "logout"){
@@ -41,17 +47,17 @@ Module.register('MMM-Facial-Recognition',{
 	},
 	
 	getDom: function() {
-		if (this.current_user != null){
 		var wrapper = document.createElement("div");
-		
-		wrapper.className = "normal medium"
-		wrapper.innerHTML = "Hello " + this.current_user +  "!"
+		wrapper.className = "normal light"
+		if (this.current_user != null){
+		wrapper.innerHTML = "Hello " + this.current_user +  ". Nice to see you!"
 
 		return wrapper;
 		}
 		else {
-			return document.createElement("div");
+			wrapper.innerHTML = "No user recognized."
 		}
+		return wrapper;
 	}
 
 });

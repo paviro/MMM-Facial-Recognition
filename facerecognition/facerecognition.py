@@ -111,7 +111,7 @@ while True:
         # (to prevent unknown detection of a known user if he moves for example and can't be detected correctly)
         elif (current_user != "unknown" and time.time() - login_timestamp > 5):
             # set current_user to unknown
-            current_user = "unknown"
+            current_user = 0
             # callback to node helper
             to_node("login", {"user": current_user, "confidence": None})
         else:
