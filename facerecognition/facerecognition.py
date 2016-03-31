@@ -22,7 +22,7 @@ to_node("status", "Facerecognition started...")
 current_user = None
 last_match = None
 detection_active = True
-login_timestamp = None
+login_timestamp = time.time()
 same_user_detected_in_row = 0
 
 # Load training data into model
