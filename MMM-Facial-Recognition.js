@@ -33,44 +33,54 @@ Module.register('MMM-Facial-Recognition',{
 		FOR_ALL: "for_all"
 		
 	},
+	login_user: function () {
+		
+		MM.getModules().withClass(this.config.DEFAULT_CLASS).exceptWithClass(this.config.FOR_ALL).enumerate(function(module) {
+			module.hide(1000, function() {
+				Log.log(module.name + ' is hidden.');
+			});
+		});
+		
+		MM.getModules().withClass(this.current_user).enumerate(function(module) {
+			module.show(1000, function() {
+				Log.log(module.name + ' is shown.');
+			});
+		});
+	},
+	logout_user: function () {
+		
+		MM.getModules().withClass(this.current_user).enumerate(function(module) {
+			module.hide(1000, function() {
+				Log.log(module.name + ' is hidden.');
+			});
+		});
+		
+		MM.getModules().withClass(this.config.DEFAULT_CLASS).exceptWithClass(this.config.FOR_ALL).enumerate(function(module) {
+			module.show(1000, function() {
+				Log.log(module.name + ' is shown.');
+			});
+		});
+	},
 	
 	// Override socket notification handler.
 	socketNotificationReceived: function(notification, payload) {
 		if (payload.action == "login"){
+			if (this.current_user_id != payload.user){
+				this.logout_user()
+			}
 			if (payload.user == -1){
 				this.current_user = "stranger"
+				this.current_user_id = payload.user;
 			}
 			else{				
 				this.current_user = this.config.USER[payload.user];
-				
-				MM.getModules().withClass(this.config.DEFAULT_CLASS).exceptWithClass(this.config.FOR_ALL).enumerate(function(module) {
-					module.hide(1000, function() {
-						Log.log(module.name + ' is hidden.');
-					});
-				});
-				
-				MM.getModules().withClass(this.current_user).enumerate(function(module) {
-					module.show(1000, function() {
-						Log.log(module.name + ' is shown.');
-					});
-				});
+				this.current_user_id = payload.user;
+				this.login_user()
 			}
 			this.updateDom(3000);
 		}
 		else if (payload.action == "logout"){
-		
-			MM.getModules().withClass(this.current_user).enumerate(function(module) {
-				module.hide(1000, function() {
-					Log.log(module.name + ' is hidden.');
-				});
-			});
-			
-			MM.getModules().withClass(this.config.DEFAULT_CLASS).exceptWithClass(this.config.FOR_ALL).enumerate(function(module) {
-				module.show(1000, function() {
-					Log.log(module.name + ' is shown.');
-				});
-			});
-			
+			this.logout_user()
 			this.current_user = null;
 			this.updateDom(3000);
 		}
