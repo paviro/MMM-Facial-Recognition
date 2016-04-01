@@ -109,7 +109,7 @@ while True:
             last_match = label
         # if label is -1 or 0, current_user is not already set to unknown and last prediction match was at least 5 seconds ago
         # (to prevent unknown detection of a known user if he moves for example and can't be detected correctly)
-        elif (current_user != "unknown" and time.time() - login_timestamp > 5):
+        elif (current_user != 0 and time.time() - login_timestamp > 5):
             # set current_user to unknown
             current_user = 0
             # callback to node helper
