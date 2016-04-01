@@ -53,6 +53,8 @@ In order for this module to do anything useful you have to assign custom classes
 	classes: 'Paul-Vincent'
 }
 ```
+## Important notice
+This module does NOT offer real security! Do NOT use it for anything highly sensitive.
 
 ## Dependencies
 - [OpenCV](http://opencv.org) (sudo apt-get install libopencv-dev python-opencv)
