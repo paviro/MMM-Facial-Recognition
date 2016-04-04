@@ -71,18 +71,18 @@ Module.register('MMM-Facial-Recognition',{
 			if (payload.user == -1){
 				this.current_user = "stranger"
 				this.current_user_id = payload.user;
+				this.sendNotification("SHOW_ALERT", {type: "notification", message: "Hello stranger, nice to meet you!", title: "Facial-Recognition"}); 
 			}
 			else{				
 				this.current_user = this.config.USER[payload.user];
 				this.current_user_id = payload.user;
 				this.login_user()
+				this.sendNotification("SHOW_ALERT", {type: "notification", message:"Hello " + this.current_user + ", nice to meet you!", title: "Facial-Recognition"}); 
 			}
-			this.updateDom(3000);
 		}
 		else if (payload.action == "logout"){
 			this.logout_user()
 			this.current_user = null;
-			this.updateDom(3000);
 		}
 	},
 	
@@ -101,20 +101,6 @@ Module.register('MMM-Facial-Recognition',{
 		this.current_user = null;
 		this.sendSocketNotification('CONFIG', this.config);
 		Log.info('Starting module: ' + this.name);
-	},
-	
-	getDom: function() {
-		var wrapper = document.createElement("div");
-		wrapper.className = "small light"
-		if (this.current_user != null){
-		wrapper.innerHTML = "Hello " + this.current_user +  ". Nice to see you!"
-
-		return wrapper;
-		}
-		else {
-			wrapper.innerHTML = "No user recognized."
-		}
-		return wrapper;
 	}
 
 });
