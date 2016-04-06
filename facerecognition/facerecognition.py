@@ -24,7 +24,10 @@ import config
 
 def to_node(type, message):
     # convert to json and print (node helper will read from stdout)
-    print(json.dumps({type: message}))
+    try:
+        print(json.dumps({type: message}))
+    except Exception:
+        pass
     # stdout has to be flushed manually to prevent delays in the node helper communication
     sys.stdout.flush()
 
