@@ -1,10 +1,15 @@
 # MMM-Facial-Recognition
 This an extension for the [MagicMirror](https://github.com/MichMich/MagicMirror). It provides facial recognition and module swaping based on the current user.
 
+## Installation
+1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/paviro/MMM-Facial-Recognition.git`. A new folder will appear navigate into it.
+2. Execute `npm install` to install the node dependencies.
+3. Execute `sudo apt-get install libopencv-dev python-opencv` to install Python dependencies. `apt-get` only works on Debian based systems like most Raspberry Pi images. If you use something else, you will have to search the web to find out how to install `python-opencv` on your system.
+
 ## Usage
 To train the needed model use the [MMM-Facial-Recognition-Tools](https://github.com/paviro/MMM-Facial-Recognition-Tools).
 
-The entry in config.js can look like the following. (NOTE: You only have to add the variables to config if want to change its standard value.)
+The entry in the `module array` in your `config.js` can look like the following. (NOTE: You only have to add the variables to config if want to change its standard value.)
 
 ```
 {
@@ -35,7 +40,7 @@ The entry in config.js can look like the following. (NOTE: You only have to add 
 }
 ```
 
-In order for this module to do anything useful you have to assign custom classes to your modules. The class `default` (if you don't change it) is shown if no user is detected or a stranger. The class `for_all` (if you don't change it) is shown for all users. To specify modules for a certain user, use their name as classname.
+In order for this module to do anything useful you have to assign custom classes to your modules. The class `default` (if you don't change it) is shown if no user or a stranger is detected. The class `for_all` (if you don't change it) is shown for all users. To specify modules for a certain user, use their name as classname (spaces are not possible at this point.
 
 ```
 {
@@ -56,7 +61,8 @@ In order for this module to do anything useful you have to assign custom classes
 This module does NOT offer real security! Do NOT use it for anything highly sensitive.
 
 ## Dependencies
-- [OpenCV](http://opencv.org) (sudo apt-get install libopencv-dev python-opencv)
+- [python-shell](https://www.npmjs.com/package/python-shell) (installed via `npm install`)
+- [OpenCV](http://opencv.org) (`sudo apt-get install libopencv-dev python-opencv`)
 
 ## Open Source Licenses
 ###[pi-facerec-box](https://github.com/tdicola/pi-facerec-box)
