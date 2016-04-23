@@ -33,6 +33,15 @@ Module.register('MMM-Facial-Recognition',{
 		FOR_ALL: "for_all"
 		
 	},
+	
+	// Define required translations.
+	getTranslations: function() {
+		return {
+			en: "translations/en.json",
+			de: "translations/de.json"
+		};
+	},
+	
 	login_user: function () {
 		
 		MM.getModules().withClass(this.config.DEFAULT_CLASS).exceptWithClass(this.config.FOR_ALL).enumerate(function(module) {
@@ -69,16 +78,16 @@ Module.register('MMM-Facial-Recognition',{
 				this.logout_user()
 			}
 			if (payload.user == -1){
-				this.current_user = "stranger"
+				this.current_user = this.translate("stranger")
 				this.current_user_id = payload.user;
-				this.sendNotification("SHOW_ALERT", {type: "notification", message: "Hello stranger, nice to meet you!", title: "Facial-Recognition"}); 
 			}
 			else{				
 				this.current_user = this.config.USER[payload.user];
 				this.current_user_id = payload.user;
 				this.login_user()
-				this.sendNotification("SHOW_ALERT", {type: "notification", message:"Hello " + this.current_user + ", nice to meet you!", title: "Facial-Recognition"}); 
 			}
+			
+			this.sendNotification("SHOW_ALERT", {type: "notification", message: this.translate("message").replace("%person", this.current_user), title: this.translate("title")});
 		}
 		else if (payload.action == "logout"){
 			this.logout_user()
