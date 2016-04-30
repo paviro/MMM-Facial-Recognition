@@ -59,7 +59,7 @@ else:
 model.load(json.loads(sys.argv[1])["TRAINING_FILE"])
 to_node("status", 'Training data loaded!')
 
-# get camera (PiCam on Raspberry, webcam on other plattforms)
+# get camera
 camera = config.get_camera()
 
 # Main Loop
