@@ -24,6 +24,8 @@ The entry in the `module array` in your `config.js` can look like the following.
 		LBPH_THRESHOLD: 50,
 		FISHER_THRESHOLD: 250,
 		EIGEN_THRESHOLD: 3000,
+		// force the use of a usb webcam on raspberry pi (on other platforms this is always true automatically)
+		useUSBCam: false,
 		// Path to your training xml
 		TRAINING_FILE: 'modules/MMM-Facial-Recognition/training.xml',
 		// recognition intervall in seconds (smaller number = faster but CPU intens!)
