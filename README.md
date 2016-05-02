@@ -65,6 +65,7 @@ This module does NOT offer real security! Do NOT use it for anything highly sens
 ## Dependencies
 - [python-shell](https://www.npmjs.com/package/python-shell) (installed via `npm install`)
 - [OpenCV](http://opencv.org) (`sudo apt-get install libopencv-dev python-opencv`)
+- picamera (`sudo pip install picamera`) - if used with the Pi Camera Module.
 
 ## Open Source Licenses
 ###[pi-facerec-box](https://github.com/tdicola/pi-facerec-box)
