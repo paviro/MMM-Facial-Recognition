@@ -16,11 +16,11 @@ module.exports = NodeHelper.create({
       console.log("[" + self.name + "] " + message.status);
       }
       if (message.hasOwnProperty('login')){
-        console.log("[" + self.name + "] " + "User " + self.config.USER[message.login.user - 1] + " with confidence " + message.login.confidence + " logged in.");
+        console.log("[" + self.name + "] " + "User " + self.config.users[message.login.user - 1] + " with confidence " + message.login.confidence + " logged in.");
         self.sendSocketNotification('user', {action: "login", user: message.login.user - 1, confidence: message.login.confidence});
         }
       if (message.hasOwnProperty('logout')){
-        console.log("[" + self.name + "] " + "User " + self.config.USER[message.logout.user - 1] + " logged out.");
+        console.log("[" + self.name + "] " + "User " + self.config.users[message.logout.user - 1] + " logged out.");
         self.sendSocketNotification('user', {action: "logout", user: message.logout.user - 1});
         }
     });

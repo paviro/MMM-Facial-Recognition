@@ -11,12 +11,15 @@ import inspect
 import os
 import json
 import sys
+import platform
 
 
 def to_node(type, message):
     print(json.dumps({type: message}))
     sys.stdout.flush()
 
+
+_platform = platform.uname()[4]
 path_to_file = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
 # Size (in pixels) to resize images for training and prediction.
@@ -36,7 +39,7 @@ HAAR_MIN_SIZE = (30, 30)
 def get_camera():
     to_node("status", "-" * 20)
     try:
-        if json.loads(sys.argv[1])["useUSBCam"] == "false":
+        if json.loads(sys.argv[1])["useUSBCam"] == False:
             import picam
             to_node("status", "PiCam ausgewählt...")
             return picam.OpenCVCapture()
@@ -46,4 +49,5 @@ def get_camera():
         import webcam
         to_node("status", "Webcam ausgewählt...")
         return webcam.OpenCVCapture(device_id=0)
-    to_node("status", "-" * 20)  
+    to_node("status", "-" * 20)
+    
