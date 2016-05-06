@@ -55,7 +55,8 @@ In order for this module to do anything useful you have to assign custom classes
 ```
 
 ## Dependencies
-- [OpenCV](http://opencv.org) (sudo apt-get install libopencv-dev python-opencv)
+- [python-shell](https://www.npmjs.com/package/python-shell) (installed via `npm install`)
+- [OpenCV](http://opencv.org) (`sudo apt-get install libopencv-dev python-opencv`)
 
 ## Open Source Licenses
 ###[pi-facerec-box](https://github.com/tdicola/pi-facerec-box)
