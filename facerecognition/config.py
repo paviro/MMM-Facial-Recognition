@@ -42,7 +42,9 @@ def get_camera():
         if json.loads(sys.argv[1])["useUSBCam"] == False:
             import picam
             to_node("status", "PiCam ausgewählt...")
-            return picam.OpenCVCapture()
+            cam = picam.OpenCVCapture()
+            cam.start()
+            return cam
         else:
             raise Exception
     except Exception:
@@ -50,4 +52,3 @@ def get_camera():
         to_node("status", "Webcam ausgewählt...")
         return webcam.OpenCVCapture(device_id=0)
     to_node("status", "-" * 20)
-    

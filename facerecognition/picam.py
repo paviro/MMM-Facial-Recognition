@@ -9,24 +9,51 @@ import io
 import cv2
 import numpy as np
 import picamera
+import threading
+
+from threading import Thread
+
+class OpenCVCapture(Thread):
+    def __init__(self):
+        Thread.__init__(self)
+        self.buffer = io.BytesIO()
+        self.lock = threading.Lock()
+        self.running = True
+
+    def run(self):
+        with picamera.PiCamera() as camera:
+            camera.resolution = (620, 540)
+            stream = io.BytesIO()
+            for stream in camera.capture_continuous(stream, format='jpeg', use_video_port=True):
+                self.lock.acquire()
+                try:
+                    # swap the stream for the buffer
+                    temp = stream
+                    stream = self.buffer
+                    self.buffer = temp
+                    stream.truncate()
+                    stream.seek(0)
+                finally:
+                    self.lock.release()
+                if self.running == False:
+                    break
+
+            camera.stop_preview()
 
 
-class OpenCVCapture(object):
     def read(self):
         """Read a single frame from the camera and return the data as an OpenCV
         image (which is a numpy array).
         """
-        # This code is based on the picamera example at:
-        # http://picamera.readthedocs.org/en/release-1.0/recipes1.html#capturing-to-an-opencv-object
-        # Capture a frame from the camera.
-        data = io.BytesIO()
-        with picamera.PiCamera() as camera:
-            camera.resolution = (620, 540)
-            camera.capture(data, format='jpeg')
-        data = np.fromstring(data.getvalue(), dtype=np.uint8)
-        # Decode the image data and return an OpenCV image.
-        image = cv2.imdecode(data, 1)
-        # Save captured image for debugging.
-        # cv2.imwrite(config.DEBUG_IMAGE, image)
-        # Return the captured image data.
+        self.lock.acquire()
+        try:
+            # Construct a numpy array from the stream
+            data = np.fromstring(self.buffer.getvalue(), dtype=np.uint8)
+            image = cv2.imdecode(data, 1)
+        finally:
+            self.lock.release()
         return image
+
+    def stop(self):
+        self.running = False
+        self.join()
