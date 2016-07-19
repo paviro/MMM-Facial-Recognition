@@ -50,9 +50,10 @@ class OpenCVCapture(Thread):
         try:
             # Construct a numpy array from the stream
             data = np.fromstring(self.buffer.getvalue(), dtype=np.uint8)
-            image = cv2.imdecode(data, 1)
         finally:
             self.lock.release()
+
+        image = cv2.imdecode(data, 1)
         return image
 
     def stop(self):
