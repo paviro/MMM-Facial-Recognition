@@ -20,7 +20,16 @@ import time
 import face
 import cv2
 import config
+import signal
 
+
+def shutdown(self, signum):
+    to_node("status", 'Shutdown -- Cleaning up camera...')
+    camera.stop()
+    camera.join()
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, shutdown)
 
 def to_node(type, message):
     # convert to json and print (node helper will read from stdout)
