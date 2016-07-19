@@ -23,6 +23,7 @@ class OpenCVCapture(Thread):
     def run(self):
         with picamera.PiCamera() as camera:
             camera.resolution = (620, 540)
+            camera.framerate = 10
             stream = io.BytesIO()
             for stream in camera.capture_continuous(stream, format='jpeg', use_video_port=True):
                 self.lock.acquire()
