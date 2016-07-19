@@ -54,18 +54,18 @@ same_user_detected_in_row = 0
 to_node("status", 'Loading training data...')
 
 # set algorithm to be used based on setting in config.js
-if json.loads(sys.argv[1])["recognitionAlgorithm"] == 1:
+if config.get("recognitionAlgorithm") == 1:
     to_node("status", "ALGORITHM: LBPH")
-    model = cv2.createLBPHFaceRecognizer(threshold=json.loads(sys.argv[1])["lbphThreshold"])
-elif json.loads(sys.argv[1])["recognitionAlgorithm"] == 2:
+    model = cv2.createLBPHFaceRecognizer(threshold=config.get("lbphThreshold"))
+elif config.get("recognitionAlgorithm") == 2:
     to_node("status", "ALGORITHM: Fisher")
-    model = cv2.createFisherFaceRecognizer(threshold=json.loads(sys.argv[1])["fisherThreshold"])
+    model = cv2.createFisherFaceRecognizer(threshold=config.get("fisherThreshold"))
 else:
     to_node("status", "ALGORITHM: Eigen")
-    model = cv2.createEigenFaceRecognizer(threshold=json.loads(sys.argv[1])["eigenThreshold"])
+    model = cv2.createEigenFaceRecognizer(threshold=config.get("eigenThreshold"))
 
 # Load training file specified in config.js
-model.load(json.loads(sys.argv[1])["trainingFile"])
+model.load(config.get("trainingFile"))
 to_node("status", 'Training data loaded!')
 
 # get camera
@@ -74,7 +74,7 @@ camera = config.get_camera()
 # Main Loop
 while True:
     # Sleep for x seconds specified in module config
-    time.sleep(json.loads(sys.argv[1])["interval"])
+    time.sleep(config.get("interval"))
     # if detecion is true, will be used to disable detection if you use a PIR sensor and no motion is detected
     if detection_active is True:
         # Get image
@@ -86,7 +86,7 @@ while True:
         # No face found, logout user?
         if result is None:
             # if last detection exceeds timeout and there is someone logged in -> logout!
-            if (current_user is not None and time.time() - login_timestamp > json.loads(sys.argv[1])["logoutDelay"]):
+            if (current_user is not None and time.time() - login_timestamp > config.get("logoutDelay")):
                 # callback logout to node helper
                 to_node("logout", {"user": current_user})
                 same_user_detected_in_row = 0
@@ -95,7 +95,7 @@ while True:
         # Set x,y coordinates, height and width from face detection result
         x, y, w, h = result
         # Crop image on face. If algorithm is not LBPH also resize because in all other algorithms image resolution has to be the same as training image resolution.
-        if json.loads(sys.argv[1])["recognitionAlgorithm"] == 1:
+        if config.get("recognitionAlgorithm") == 1:
             crop = face.crop(image, x, y, w, h)
         else:
             crop = face.resize(face.crop(image, x, y, w, h))

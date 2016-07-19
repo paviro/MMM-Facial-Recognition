@@ -35,11 +35,15 @@ HAAR_SCALE_FACTOR = 1.3
 HAAR_MIN_NEIGHBORS = 4
 HAAR_MIN_SIZE = (30, 30)
 
+CONFIG = json.loads(sys.argv[1]);
+
+def get(key):
+    return CONFIG[key]
 
 def get_camera():
     to_node("status", "-" * 20)
     try:
-        if json.loads(sys.argv[1])["useUSBCam"] == False:
+        if get("useUSBCam") == False:
             import picam
             to_node("status", "PiCam ausgewählt...")
             cam = picam.OpenCVCapture()
