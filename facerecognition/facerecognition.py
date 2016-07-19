@@ -71,6 +71,9 @@ to_node("status", 'Training data loaded!')
 # get camera
 camera = config.get_camera()
 
+# sleep for a second to let the camera warm up
+time.sleep(1)
+
 # Main Loop
 while True:
     # Sleep for x seconds specified in module config
