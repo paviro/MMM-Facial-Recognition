@@ -23,6 +23,7 @@ class OpenCVCapture(Thread):
     def run(self):
         with picamera.PiCamera() as camera:
             camera.resolution = (620, 540)
+            camera.framerate = 10
             stream = io.BytesIO()
             for stream in camera.capture_continuous(stream, format='jpeg', use_video_port=True):
                 self.lock.acquire()
@@ -49,9 +50,10 @@ class OpenCVCapture(Thread):
         try:
             # Construct a numpy array from the stream
             data = np.fromstring(self.buffer.getvalue(), dtype=np.uint8)
-            image = cv2.imdecode(data, 1)
         finally:
             self.lock.release()
+
+        image = cv2.imdecode(data, 1)
         return image
 
     def stop(self):
