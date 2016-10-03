@@ -32,7 +32,7 @@ Module.register('MMM-Facial-Recognition',{
 		//Module set used for strangers and if no user is detected
 		defaultClass: "default",
 		//Set of modules which should be shown for every user
-		forAllClass: "for_all"
+		everyoneClass: "everyone"
 		
 	},
 	
@@ -47,7 +47,7 @@ Module.register('MMM-Facial-Recognition',{
 	
 	login_user: function () {
 		
-		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.forAllClass).enumerate(function(module) {
+		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
 			module.hide(1000, function() {
 				Log.log(module.name + ' is hidden.');
 			});
@@ -69,7 +69,7 @@ Module.register('MMM-Facial-Recognition',{
 			});
 		});
 		
-		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.forAllClass).enumerate(function(module) {
+		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
 			module.show(1000, function() {
 				Log.log(module.name + ' is shown.');
 			});
