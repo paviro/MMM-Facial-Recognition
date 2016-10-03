@@ -33,12 +33,12 @@ The entry in config.js can look like the following. (NOTE: You only have to add 
 		//Module set used for strangers and if no user is detected
 		defaultClass: "default",
 		//Set of modules which should be shown for every user
-		forAllClass: "for_all"
+		everyoneClass: "everyone"
 	}
 }
 ```
 
-In order for this module to do anything useful you have to assign custom classes to your modules. The class `default` (if you don't change it) is shown if no user is detected or a stranger. The class `for_all` (if you don't change it) is shown for all users. To specify modules for a certain user, use their name as classname.
+In order for this module to do anything useful you have to assign custom classes to your modules. The class `default` (if you don't change it) is shown if no user is detected or a stranger. The class `everyone` (if you don't change it) is shown for all users. To specify modules for a certain user, use their name as classname.
 
 ```
 {
@@ -46,7 +46,7 @@ In order for this module to do anything useful you have to assign custom classes
 	position: 'top_left',
 	//Set your classes here seperated by a space.
 	//Shown for all users
-	classes: 'default for_all'
+	classes: 'default everyone'
 },
 {
 	module: 'example_module2',
