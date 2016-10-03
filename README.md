@@ -9,7 +9,6 @@ The entry in config.js can look like the following. (NOTE: You only have to add 
 ```
 {
 	module: 'MMM-Facial-Recognition',
-	position: 'top_left',
 	config: {
 		// 1=LBPH | 2=Fisher | 3=Eigen
 		recognitionAlgorithm: 1,

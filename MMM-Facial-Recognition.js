@@ -105,7 +105,6 @@ Module.register('MMM-Facial-Recognition',{
 	notificationReceived: function(notification, payload, sender) {
 		if (notification === 'DOM_OBJECTS_CREATED') {
 			MM.getModules().exceptWithClass("default").enumerate(function(module) {
-				console.log(module);
 				module.hide(1000, function() {
 					Log.log('Module is hidden.');
 				});
