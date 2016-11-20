@@ -27,7 +27,7 @@ module.exports = NodeHelper.create({
 
     pyshell.end(function (err) {
       if (err) throw err;
-      console.log("[" + self.name + "] " + 'finished');
+      console.log("[" + self.name + "] " + 'finished running...');
     });
   },
   

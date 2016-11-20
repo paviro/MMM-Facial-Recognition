@@ -22,15 +22,6 @@ import cv2
 import config
 import signal
 
-
-def shutdown(self, signum):
-    to_node("status", 'Shutdown -- Cleaning up camera...')
-    camera.stop()
-    camera.join()
-    sys.exit(0)
-
-signal.signal(signal.SIGINT, shutdown)
-
 def to_node(type, message):
     # convert to json and print (node helper will read from stdout)
     try:
@@ -70,6 +61,13 @@ to_node("status", 'Training data loaded!')
 
 # get camera
 camera = config.get_camera()
+
+def shutdown(self, signum):
+    to_node("status", 'Shutdown: Cleaning up camera...')
+    camera.stop()
+    quit()
+
+signal.signal(signal.SIGINT, shutdown)
 
 # sleep for a second to let the camera warm up
 time.sleep(1)
