@@ -59,7 +59,7 @@ Module.register('MMM-Facial-Recognition',{
 			});
 		});
 		
-		this.sendNotification("CURRENT_USER", this.current_user);
+		this.sendNotification("CURRENT_PROFILE", this.current_user);
 	},
 	logout_user: function () {
 		
@@ -75,7 +75,7 @@ Module.register('MMM-Facial-Recognition',{
 			});
 		});
 		
-		this.sendNotification("CURRENT_USER", "None");
+		this.sendNotification("CURRENT_PROFILE", this.config.defaultClass);
 	},
 	
 	// Override socket notification handler.
