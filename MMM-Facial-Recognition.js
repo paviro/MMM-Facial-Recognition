@@ -44,9 +44,9 @@ Module.register('MMM-Facial-Recognition',{
 		return {
 			en: "translations/en.json",
 			de: "translations/de.json",
-      			es: "translations/es.json",
-      			zh: "translations/zh.json",
-      			nl: "translations/nl.json",
+  			es: "translations/es.json",
+  			zh: "translations/zh.json",
+  			nl: "translations/nl.json",
 			fr: "translations/fr.json"
 		};
 	},
@@ -54,17 +54,17 @@ Module.register('MMM-Facial-Recognition',{
 	login_user: function () {
 		
 		if (!this.config.useProfileSwitcher) {
-		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
-			module.hide(1000, function() {
-				Log.log(module.name + ' is hidden.');
+			MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
+				module.hide(1000, function() {
+					Log.log(module.name + ' is hidden.');
+				});
 			});
-		});
-		
-		MM.getModules().withClass(this.current_user).enumerate(function(module) {
-			module.show(1000, function() {
-				Log.log(module.name + ' is shown.');
+			
+			MM.getModules().withClass(this.current_user).enumerate(function(module) {
+				module.show(1000, function() {
+					Log.log(module.name + ' is shown.');
+				});
 			});
-		});
 		}
 		
 		this.sendNotification("CURRENT_PROFILE", this.current_user);
@@ -72,17 +72,17 @@ Module.register('MMM-Facial-Recognition',{
 	logout_user: function () {
 		
 		if (!this.config.useProfileSwitcher) {
-		MM.getModules().withClass(this.current_user).enumerate(function(module) {
-			module.hide(1000, function() {
-				Log.log(module.name + ' is hidden.');
+			MM.getModules().withClass(this.current_user).enumerate(function(module) {
+				module.hide(1000, function() {
+					Log.log(module.name + ' is hidden.');
+				});
 			});
-		});
-		
-		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
-			module.show(1000, function() {
-				Log.log(module.name + ' is shown.');
+			
+			MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
+				module.show(1000, function() {
+					Log.log(module.name + ' is shown.');
+				});
 			});
-		});
 		}
 		
 		this.sendNotification("CURRENT_PROFILE", this.config.defaultClass);
@@ -105,7 +105,7 @@ Module.register('MMM-Facial-Recognition',{
 			}
 			
 			if (!this.config.useProfileSwitcher) {
-			this.sendNotification("SHOW_ALERT", {type: "notification", message: this.translate("message").replace("%person", this.current_user), title: this.translate("title")});
+				this.sendNotification("SHOW_ALERT", {type: "notification", message: this.translate("message").replace("%person", this.current_user), title: this.translate("title")});
 			}
 		}
 		else if (payload.action == "logout"){
