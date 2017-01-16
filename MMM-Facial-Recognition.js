@@ -32,7 +32,10 @@ Module.register('MMM-Facial-Recognition',{
 		//Module set used for strangers and if no user is detected
 		defaultClass: "default",
 		//Set of modules which should be shown for every user
-		everyoneClass: "everyone"
+		everyoneClass: "everyone",
+		// Use tosti007's MMM-ProfileSwitcher module
+		// If true, do not forget to set the defaultClass to the same value as nobodyClass
+		useProfileSwitcher: false
 		
 	},
 	
