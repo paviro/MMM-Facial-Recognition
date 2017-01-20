@@ -98,7 +98,7 @@ Module.register('MMM-Facial-Recognition',{
 				this.login_user()
 			}
 			
-			if (welcomeMessage) {
+			if (this.config.welcomeMessage) {
 				this.sendNotification("SHOW_ALERT", {type: "notification", message: this.translate("message").replace("%person", this.current_user), title: this.translate("title")});
 			}
 		}
