@@ -32,7 +32,9 @@ The entry in config.js can look like the following. (NOTE: You only have to add 
 		//Module set used for strangers and if no user is detected
 		defaultClass: "default",
 		//Set of modules which should be shown for every user
-		everyoneClass: "everyone"
+		everyoneClass: "everyone",
+		// Boolean to toggle welcomeMessage
+		welcomeMessage: true
 	}
 }
 ```
