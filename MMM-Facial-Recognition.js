@@ -34,7 +34,10 @@ Module.register('MMM-Facial-Recognition',{
 		//Set of modules which should be shown for every user
 		everyoneClass: "everyone",
 		// Boolean to toggle welcomeMessage
-		welcomeMessage: true
+		welcomeMessage: true,
+		// Use tosti007's MMM-ProfileSwitcher module
+		// If true, do not forget to set the defaultClass to the same value as nobodyClass
+		useProfileSwitcher: false
 	},
 	
 	// Define required translations.
@@ -42,44 +45,48 @@ Module.register('MMM-Facial-Recognition',{
 		return {
 			en: "translations/en.json",
 			de: "translations/de.json",
-      			es: "translations/es.json",
-      			zh: "translations/zh.json",
-      			nl: "translations/nl.json",
+      es: "translations/es.json",
+      zh: "translations/zh.json",
+      nl: "translations/nl.json",
 			fr: "translations/fr.json"
 		};
 	},
 	
 	login_user: function () {
 		
-		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
-			module.hide(1000, function() {
-				Log.log(module.name + ' is hidden.');
+		if (!this.config.useProfileSwitcher) {
+			MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
+				module.hide(1000, function() {
+					Log.log(module.name + ' is hidden.');
+				});
 			});
-		});
-		
-		MM.getModules().withClass(this.current_user).enumerate(function(module) {
-			module.show(1000, function() {
-				Log.log(module.name + ' is shown.');
+			
+			MM.getModules().withClass(this.current_user).enumerate(function(module) {
+				module.show(1000, function() {
+					Log.log(module.name + ' is shown.');
+				});
 			});
-		});
+		}
 		
-		this.sendNotification("CURRENT_USER", this.current_user);
+		this.sendNotification("CURRENT_PROFILE", this.current_user);
 	},
 	logout_user: function () {
 		
-		MM.getModules().withClass(this.current_user).enumerate(function(module) {
-			module.hide(1000, function() {
-				Log.log(module.name + ' is hidden.');
+		if (!this.config.useProfileSwitcher) {
+			MM.getModules().withClass(this.current_user).enumerate(function(module) {
+				module.hide(1000, function() {
+					Log.log(module.name + ' is hidden.');
+				});
 			});
-		});
-		
-		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
-			module.show(1000, function() {
-				Log.log(module.name + ' is shown.');
+			
+			MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
+				module.show(1000, function() {
+					Log.log(module.name + ' is shown.');
+				});
 			});
-		});
+		}
 		
-		this.sendNotification("CURRENT_USER", "None");
+		this.sendNotification("CURRENT_PROFILE", this.config.defaultClass);
 	},
 	
 	// Override socket notification handler.
@@ -98,7 +105,7 @@ Module.register('MMM-Facial-Recognition',{
 				this.login_user()
 			}
 			
-			if (this.config.welcomeMessage) {
+			if (this.config.welcomeMessage && !this.config.useProfileSwitcher) {
 				this.sendNotification("SHOW_ALERT", {type: "notification", message: this.translate("message").replace("%person", this.current_user), title: this.translate("title")});
 			}
 		}
@@ -109,7 +116,7 @@ Module.register('MMM-Facial-Recognition',{
 	},
 	
 	notificationReceived: function(notification, payload, sender) {
-		if (notification === 'DOM_OBJECTS_CREATED') {
+		if (notification === 'DOM_OBJECTS_CREATED' && !this.config.useProfileSwitcher) {
 			MM.getModules().exceptWithClass("default").enumerate(function(module) {
 				module.hide(1000, function() {
 					Log.log('Module is hidden.');
