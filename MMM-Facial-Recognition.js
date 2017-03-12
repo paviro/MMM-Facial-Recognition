@@ -8,7 +8,7 @@
  */
 
 Module.register('MMM-Facial-Recognition',{
-	
+
 	defaults: {
 		// 1=LBPH | 2=Fisher | 3=Eigen
 		recognitionAlgorithm: 1,
@@ -36,7 +36,7 @@ Module.register('MMM-Facial-Recognition',{
 		// Boolean to toggle welcomeMessage
 		welcomeMessage: true
 	},
-	
+
 	// Define required translations.
 	getTranslations: function() {
 		return {
@@ -46,43 +46,44 @@ Module.register('MMM-Facial-Recognition',{
       			zh: "translations/zh.json",
       			nl: "translations/nl.json",
 			sv: "translations/sv.json",
-			fr: "translations/fr.json"
+			fr: "translations/fr.json",
+			id: "translations/id.json"
 		};
 	},
-	
+
 	login_user: function () {
-		
+
 		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
 			module.hide(1000, function() {
 				Log.log(module.name + ' is hidden.');
 			});
 		});
-		
+
 		MM.getModules().withClass(this.current_user).enumerate(function(module) {
 			module.show(1000, function() {
 				Log.log(module.name + ' is shown.');
 			});
 		});
-		
+
 		this.sendNotification("CURRENT_USER", this.current_user);
 	},
 	logout_user: function () {
-		
+
 		MM.getModules().withClass(this.current_user).enumerate(function(module) {
 			module.hide(1000, function() {
 				Log.log(module.name + ' is hidden.');
 			});
 		});
-		
+
 		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
 			module.show(1000, function() {
 				Log.log(module.name + ' is shown.');
 			});
 		});
-		
+
 		this.sendNotification("CURRENT_USER", "None");
 	},
-	
+
 	// Override socket notification handler.
 	socketNotificationReceived: function(notification, payload) {
 		if (payload.action == "login"){
@@ -93,12 +94,12 @@ Module.register('MMM-Facial-Recognition',{
 				this.current_user = this.translate("stranger")
 				this.current_user_id = payload.user;
 			}
-			else{				
+			else{
 				this.current_user = this.config.users[payload.user];
 				this.current_user_id = payload.user;
 				this.login_user()
 			}
-			
+
 			if (this.config.welcomeMessage) {
 				this.sendNotification("SHOW_ALERT", {type: "notification", message: this.translate("message").replace("%person", this.current_user), title: this.translate("title")});
 			}
@@ -108,7 +109,7 @@ Module.register('MMM-Facial-Recognition',{
 			this.current_user = null;
 		}
 	},
-	
+
 	notificationReceived: function(notification, payload, sender) {
 		if (notification === 'DOM_OBJECTS_CREATED') {
 			MM.getModules().exceptWithClass("default").enumerate(function(module) {
@@ -118,7 +119,7 @@ Module.register('MMM-Facial-Recognition',{
 			});
 		}
 	},
-	
+
 	start: function() {
 		this.current_user = null;
 		this.sendSocketNotification('CONFIG', this.config);
