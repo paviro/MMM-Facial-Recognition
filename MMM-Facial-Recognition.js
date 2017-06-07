@@ -53,32 +53,36 @@ Module.register('MMM-Facial-Recognition',{
 
 	login_user: function () {
 
+    var self = this;
+
 		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
 			module.hide(1000, function() {
 				Log.log(module.name + ' is hidden.');
-			});
+			}, {lockString: self.identifier});
 		});
 
 		MM.getModules().withClass(this.current_user).enumerate(function(module) {
 			module.show(1000, function() {
 				Log.log(module.name + ' is shown.');
-			});
+			}, {lockString: self.identifier});
 		});
 
 		this.sendNotification("CURRENT_USER", this.current_user);
 	},
 	logout_user: function () {
 
+    var self = this;
+
 		MM.getModules().withClass(this.current_user).enumerate(function(module) {
 			module.hide(1000, function() {
 				Log.log(module.name + ' is hidden.');
-			});
+			}, {lockString: self.identifier});
 		});
 
 		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
 			module.show(1000, function() {
 				Log.log(module.name + ' is shown.');
-			});
+			}, {lockString: self.identifier});
 		});
 
 		this.sendNotification("CURRENT_USER", "None");
@@ -112,10 +116,11 @@ Module.register('MMM-Facial-Recognition',{
 
 	notificationReceived: function(notification, payload, sender) {
 		if (notification === 'DOM_OBJECTS_CREATED') {
+      var self = this;
 			MM.getModules().exceptWithClass("default").enumerate(function(module) {
 				module.hide(1000, function() {
 					Log.log('Module is hidden.');
-				});
+				}, {lockString: self.identifier});
 			});
 		}
 	},
